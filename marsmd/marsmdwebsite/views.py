@@ -1,6 +1,16 @@
 from django.shortcuts import render
-
+import MySQLdb
 
 # Create your views here.
 def login(request):
+	
+	db = MySQLdb.connect(user='root', db='mars', passwd='Rohan333', host='localhost')
+	cursor = db.cursor()
+	result = cursor.execute('SELECT * FROM LOGIN')
+	name = cursor.fetchall()
+
+	if(result):
+		print(name)
+		print ("SUCCESS!")
+
 	return render(request, 'marsmdwebsite/login.html')
