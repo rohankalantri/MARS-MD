@@ -14,3 +14,7 @@ def login(request):
 		print ("SUCCESS!")
 
 	return render(request, 'marsmdwebsite/login.html')
+
+def index(request):
+	return render(request, 'marsmdwebsite/home.html')
+	
