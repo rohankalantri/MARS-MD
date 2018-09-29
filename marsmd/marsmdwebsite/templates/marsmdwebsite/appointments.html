@@ -1,0 +1,100 @@
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+{% extends "marsmdwebsite/header.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container" style="background-color:#FFFFFF">
+        <div class="mx-auto">
+            <div class="d-flex justify-content-center contact-image">
+                <img src="https://pi.tedcdn.com/r/talkstar-assets.s3.amazonaws.com/production/playlists/playlist_414/big_deal_mars_1200x627.jpg?quality=89&w=800" alt="rocket_contact" height="104.5" width="200" class="img-center center-block" />
+            </div>
+            <form method="post">
+                <h3>BOOK AN APPOINTMENT</h3>
+               <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="mr-sm-2" for="speciality">Speciality:</label>
+                            <select class="form-control" id="speciality">
+                              <option disabled>Select some option</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="mr-sm-2" for="doc-name">Name of the Doctor:</label>
+                            <select class="form-control" id="doc-name">
+                                <option disabled>Name of the Doctor</option>
+                                <option>John Doe</option>
+                                <option>Dexter</option>
+                                <option>Dee Dee</option>
+                                <option>Dr Dre</option>
+                            </select>                       
+                        </div>
+                        <div class="form-group">
+                            <label class="mr-sm-2" for="appointment-time">Available Timings:</label>
+                            <select class="form-control" id="appointment-time">
+                                <option disabled>Select Time</option>
+                                <option>Monday: 12PM to 2PM</option>
+                                <option disabled>Tuesday: Unavailable</option>
+                                <option>Wednesday: 12PM to 2PM</option>
+                                <option disabled>Thursday: Unavailable</option>
+                                <option>Friday: 12PM to 2PM</option>
+                                <option disabled>Saturday: Unavailable</option>
+                            </select>                       
+                        </div>
+
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#datetimepicker11').datetimepicker({
+                                    daysOfWeekDisabled: [0, 6]
+                                });
+                            });
+                        </script>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker11'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar">
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        
+                        <div class="form-group">
+                            <input type="text" name="patient-name" class="form-control" placeholder="Your Name *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="patient-email" class="form-control" placeholder="Your Email *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="patient-phone" class="form-control" placeholder="Your Phone Number *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <textarea name="patient-address" class="form-control" placeholder="Address *" style="width: 100%; height: 125px;"></textarea>
+                        </div>
+
+                    </div>
+
+                </div>
+                    <div class="col-md-12">
+
+                        <div class="form-group">
+                            <textarea name="patient-illness-description" class="form-control" placeholder="Describe your illness and symptoms to help the doctor serve you better *" style="width: 100%; height: 150px;"></textarea>
+                        </div>
+                        <div class="form-group text-center">
+                            <input type="submit" name="btnSubmit" class="btn btn-danger" value="BOOK THE APPOINTMENT" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+</div>
+{% endblock %}

@@ -241,6 +241,9 @@ section
 	background-size: cover;
 	background-position: center center;
 }
+.blog-image{
+	height: 10%;
+}
 .nopadding
 {
 	padding: 0px !important;

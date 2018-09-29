@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import MySQLdb
 
 # Create your views here.
@@ -17,4 +17,12 @@ def login(request):
 
 def index(request):
 	return render(request, 'marsmdwebsite/home.html')
+
+def news(request):
+	# return redirect('marsmdwebsite/news.html')
+	return render(request, 'marsmdwebsite/news.html')
+	
+def appointments(request):
+	# return redirect('marsmdwebsite/news.html')
+	return render(request, 'marsmdwebsite/appointments.html')
 	
