@@ -1,44 +1,89 @@
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 {% extends "marsmdwebsite/header.html" %}
 {% load staticfiles %}
 
+{% block cssLinks %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
+<!--     <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+    </script> -->
+
+    <script>
+      $( function() {
+        $( "#datepicker" ).datepicker({
+            daysOfWeekDisabled: [0, 6]
+        });
+
+      } );
+    </script>
+{% endblock %}
+
+
+
 {% block content %}
+
+
 <div class="container" style="background-color:#FFFFFF">
-        <div class="mx-auto">
+        <div class="mx-auto" id="appointment">
             <div class="d-flex justify-content-center contact-image">
-                <img src="https://pi.tedcdn.com/r/talkstar-assets.s3.amazonaws.com/production/playlists/playlist_414/big_deal_mars_1200x627.jpg?quality=89&w=800" alt="rocket_contact" height="104.5" width="200" class="img-center center-block" />
+                <!-- <img src="https://pi.tedcdn.com/r/talkstar-assets.s3.amazonaws.com/production/playlists/playlist_414/big_deal_mars_1200x627.jpg?quality=89&w=800" alt="rocket_contact" height="104.5" width="200" class="img-center center-block" /> -->
             </div>
-            <form method="post">
+            <form method="post" action="">
+                {% csrf_token %}
+                {{ form.as_p }}
                 <h3>BOOK AN APPOINTMENT</h3>
                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="mr-sm-2" for="speciality">Speciality:</label>
-                            <select class="form-control" id="speciality">
+                            <select class="form-control" id="speciality" name="doctor_speciality">
                               <option disabled>Select some option</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
+                              
+                              {% for doctor in doctors_dictionary %}
+
+                                <option>{{ doctor.speciality }}</option>
+
+                              {% endfor %}
+
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="mr-sm-2" for="doc-name">Name of the Doctor:</label>
-                            <select class="form-control" id="doc-name">
+                            <select class="form-control" id="doc-name" name="doc_name" >
                                 <option disabled>Name of the Doctor</option>
-                                <option>John Doe</option>
-                                <option>Dexter</option>
-                                <option>Dee Dee</option>
-                                <option>Dr Dre</option>
+                                {% for doctor in doctors_dictionary %}
+
+                                    <option>{{ doctor.doc_name }}</option>
+
+                                {% endfor %}
                             </select>                       
                         </div>
+
                         <div class="form-group">
                             <label class="mr-sm-2" for="appointment-time">Available Timings:</label>
-                            <select class="form-control" id="appointment-time">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control" id="datepicker" name="date" required />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar">
+                                    </span>
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            
+                            <select class="form-control" id="appointment-time" name="appointment_time">
                                 <option disabled>Select Time</option>
                                 <option>Monday: 12PM to 2PM</option>
                                 <option disabled>Tuesday: Unavailable</option>
@@ -48,37 +93,22 @@
                                 <option disabled>Saturday: Unavailable</option>
                             </select>                       
                         </div>
+                        
 
-                        <script type="text/javascript">
-                            $(function () {
-                                $('#datetimepicker11').datetimepicker({
-                                    daysOfWeekDisabled: [0, 6]
-                                });
-                            });
-                        </script>
-                        <div class="form-group">
-                            <div class='input-group date' id='datetimepicker11'>
-                                <input type='text' class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar">
-                                    </span>
-                                </span>
-                            </div>
-                        </div>
                     </div>
                     <div class="col-md-6">
                         
                         <div class="form-group">
-                            <input type="text" name="patient-name" class="form-control" placeholder="Your Name *" value="" />
+                            <input type="text" name="patient-name" class="form-control" placeholder="Your Name *" value="" required/>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="patient-email" class="form-control" placeholder="Your Email *" value="" />
+                            <input type="text" name="patient-email" class="form-control" placeholder="Your Email *" value="" required/>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="patient-phone" class="form-control" placeholder="Your Phone Number *" value="" />
+                            <input type="text" name="patient-phone" class="form-control" placeholder="Your Phone Number *" value="" required/>
                         </div>
                         <div class="form-group">
-                            <textarea name="patient-address" class="form-control" placeholder="Address *" style="width: 100%; height: 125px;"></textarea>
+                            <textarea name="patient-address" class="form-control" placeholder="Address *" style="width: 100%; height: 125px;" required></textarea>
                         </div>
 
                     </div>

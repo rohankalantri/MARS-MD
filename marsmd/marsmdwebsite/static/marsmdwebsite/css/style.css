@@ -116,7 +116,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   transform: scale(0.95);
 }
 
-input[type=text] {
+input[type=text],input[type=password] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -201,9 +201,9 @@ input[type=text]:placeholder {
   -moz-animation-fill-mode:forwards;
   animation-fill-mode:forwards;
 
-  -webkit-animation-duration:1s;
-  -moz-animation-duration:1s;
-  animation-duration:1s;
+  -webkit-animation-duration:0.5s;
+  -moz-animation-duration:0.5s;
+  animation-duration:0.5s;
 }
 
 .fadeIn.first {
@@ -264,4 +264,82 @@ input[type=text]:placeholder {
 
 * {
   box-sizing: border-box;
+}
+
+.button {
+  border:0;
+  outline:none;
+  margin-left: 172px;
+  margin-right: 172px;
+  border-radius:10px 10px 10px 10px;
+  padding:10px 0;
+  font-size:2rem;
+  font-weight:$bold;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  background: white;
+  color:$white;
+  transition:all.5s ease-in-out;
+  -webkit-appearance: none;
+}
+
+.button-block {
+  display:block;
+  width:40%;
+}
+
+.button:hover, .button:focus {
+    background: #07E8F7;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ffffff;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #56BAED;
+    border-radius: 10px;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+    -webkit-animation: fadeEffect 1.5s;
+    animation: fadeEffect 1.5s;
+}
+
+.tab {
+    text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display:inline-block;
+  margin: 40px 8px 10px 8px; 
+  color:#cccccc;
+  background-color: #ffffff
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 20px;
+}
+
+.tabPassword {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+    -webkit-animation: fadeEffect 1.5s;
+    animation: fadeEffect 1.5s;
 }

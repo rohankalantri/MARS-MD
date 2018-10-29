@@ -1,0 +1,151 @@
+{% extends "marsmdwebsite/header.html" %}
+{% load staticfiles %}
+
+
+{% block cssLinks %}
+<link rel="stylesheet" type="text/css" href="{% static 'marsmdwebsite/styles/bootstrap4/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'marsmdwebsite/styles/contact.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'marsmdwebsite/styles/contact_responsive.css' %}">
+{% endblock %}
+<!-- 
+	{%block background %}
+
+	<div class="home">
+	<div class="background_image" style="background-image:url({% static 'marsmdwebsite/images/contact.jpg' %})"></div>
+	{% endblock %}
+ -->
+	{% block content %}
+		
+
+		<div class="home1_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="home_content">
+							<div class="home_title">Nearby</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Google Map -->
+
+	<div class="contact_map">
+		<div class="map">
+			<div id="google_map" class="google_map">
+				<div class="map_container">
+					<div id="map"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<br>
+	<br>
+	<br>
+
+	{% endblock %}
+	<!-- Footer -->
+
+{% block postFooter %}
+
+<script src="{% static 'marsmdwebsite/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'marsmdwebsite/styles/bootstrap4/popper.js' %}"></script>
+<script src="{% static 'marsmdwebsite/styles/bootstrap4/bootstrap.min.js' %}"></script>
+<script src="{% static 'marsmdwebsite/plugins/easing/easing.js' %}"></script>
+<script src="{% static 'marsmdwebsite/plugins/parallax-js-master/parallax.min.js' %}"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script> -->
+<script src="js/contact.js"></script>
+<script>
+// Initialize and add the map
+	var map, infoWindow,pos= {lat: -33.867, lng: 151.195};
+	      function initMap() {
+	        map = new google.maps.Map(document.getElementById('map'), {
+	          center: {lat: 40.4531, lng: 356.3117},
+	          zoom: 15
+	        });
+	        
+	        infoWindow = new google.maps.InfoWindow;
+	        
+	        // Try HTML5 geolocation.
+	        if (navigator.geolocation) {
+	          navigator.geolocation.getCurrentPosition(function(position) {
+	             pos = {
+	              lat: position.coords.latitude,
+	              lng: position.coords.longitude
+	            };
+	            console.log(pos);
+	             infoWindow.setPosition(pos);
+	             infoWindow.setContent('Location found.');
+	             infoWindow.open(map);
+	             map.setCenter(pos);
+	            find();
+	          }, function() {
+	            handleLocationError(true, infoWindow, map.getCenter());
+	          });
+	        } else {
+	          // Browser doesn't support Geolocation
+	          handleLocationError(false, infoWindow, map.getCenter());
+	        }
+	        console.log(pos);
+	        function find(){
+	        var request = {
+	            location: pos,
+	            radius: '2000',
+	            type: ['pharmacy']
+	          };
+
+	          service = new google.maps.places.PlacesService(map);
+	          service.nearbySearch(request, callback);
+	        
+	          function callback(results, status) {
+	            if (status == google.maps.places.PlacesServiceStatus.OK) {
+	              for (var i = 0; i < results.length; i++) {
+	                var place = results[i];
+	                console.log(place);
+	                createMarker(results[i]);
+	        }
+	      }
+	    }
+	    function createMarker(position) {
+	       var marker= new google.maps.Marker({
+	            position: position.geometry.location,
+	            map: map,
+	            title: position.name
+
+	        });
+
+	         google.maps.event.addListener(marker, 'click', function() {
+	          info = new google.maps.InfoWindow;
+	          info.setContent(position.name);
+	          info.open(map, this);
+	        });
+	        }
+	      }
+	}
+
+
+	      
+
+	      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+	        infoWindow.setPosition(pos);
+	        infoWindow.setContent(browserHasGeolocation ?
+	                              'Error: The Geolocation service failed.' :
+	                              'Error: Your browser doesn\'t support geolocation.');
+	        infoWindow.open(map);
+	      }
+ 
+</script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdx_5p5Y17Xo1rfovONEvvOC6LtpQzNOM&#038 &callback=initMap&libraries=places">
+</script>
+
+{% endblock %}

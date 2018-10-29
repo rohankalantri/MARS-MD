@@ -7,9 +7,9 @@
 
 1. Fonts
 2. Body and some general stuff
-3. Header
-4. Menu
-5. Home
+3. Header1
+4. Menu1
+5. Home1
 6. News
 7. Footer
 
@@ -346,30 +346,31 @@ section
 }
 
 /*********************************
-3. Header
+3. Header1
 *********************************/
 
-.header
+.header1
 {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
+	margin-bottom: 700px;
 	background: #FFFFFF;
 	z-index: 100;
 }
-.header.scrolled
+.header1.scrolled
 {
 	position: fixed;
 	top: -91px;
 	left: 0;
 }
-.header_top
+.header1_top
 {
 	width: 100%;
 	z-index: 2;
 }
-.header_top_content
+.header1_top_content
 {
 	height: 91px;
 	-webkit-transition: all 200ms ease;
@@ -394,17 +395,17 @@ section
 	line-height: 0.75;
 	vertical-align: text-top;
 }
-.header_top_nav ul li
+.header1_top_nav ul li
 {
 	position: relative;
 }
-.header_top_nav ul li:not(:last-child)::after
+.header1_top_nav ul li:not(:last-child)::after
 {
 	content: '|';
 	margin-left: 12px;
 	margin-right: 12px;
 }
-.header_top_nav ul li a
+.header1_top_nav ul li a
 {
 	font-size: 14px;
 	font-weight: 500;
@@ -415,22 +416,22 @@ section
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
-.header_top_nav ul li a:hover
+.header1_top_nav ul li a:hover
 {
 	color: #32c69a;
 }
-.header_top_phone
+.header1_top_phone
 {
 	margin-left: 44px;
 }
-.header_top_phone i
+.header1_top_phone i
 {
 	font-size: 22px;
 	color: #32c69a;
 	vertical-align: middle;
 	transform: translateY(-1px);
 }
-.header_top_phone span
+.header1_top_phone span
 {
 	font-size: 16px;
 	font-weight: 600;
@@ -457,20 +458,20 @@ section
 {
 	color: #329fec;
 }
-.header_nav
+.header1_nav
 {
 	z-index: 2;
 }
-.header_nav_inner
+.header1_nav_inner
 {
 	width: 100%;
 }
-.header_nav_container
+.header1_nav_container
 {
 	z-index: 1;
 	background: #32c69a;
 }
-.header_nav_content
+.header1_nav_content
 {
 	height: 78px;
 }
@@ -575,14 +576,14 @@ section
 	cursor: pointer;
 	background: #FFFFFF;
 }
-.header_search
+.header1_search
 {
 	display: inline-block;
 	vertical-align: middle;
 	padding: 10px;
 	cursor: pointer;
 }
-.header_search i
+.header1_search i
 {
 	color: #4c4c4c;
 	-webkit-transition: all 200ms ease;
@@ -591,16 +592,16 @@ section
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
-.header_search:hover i
+.header1_search:hover i
 {
 	color: #329fec;
 }
 
 /*********************************
-4. Menu
+4. Menu1
 *********************************/
 
-.menu
+.menu1
 {
 	position: fixed;
 	width: 100vw;
@@ -610,30 +611,30 @@ section
 	opacity: 0;
 	visibility: hidden;
 }
-.menu.active
+.menu1.active
 {
 	opacity: 0.98;
 	visibility: visible;
 }
-.menu_content
+.menu1_content
 {
 	width: 100%;
 	height: 100%;
 }
-.menu_content ul
+.menu1_content ul
 {
 	margin-top: 40px;
 }
-.menu_item
+.menu1_item
 {
 	position: relative;
 	margin-bottom: 3px;
 }
-.menu_item:last-child
+.menu1_item:last-child
 {
 	margin-bottom: 0px;
 }
-.menu_item a
+.menu1_item a
 {
 	display: inline-block;
 	position: relative;
@@ -641,7 +642,7 @@ section
 	color: #FFFFFF;
 	font-weight: 600;
 }
-.menu_item a::after
+.menu1_item a::after
 {
 	display: block;
 	position: absolute;
@@ -660,11 +661,11 @@ section
 	-o-transition: all 200ms ease;
 	transition: all 400ms ease;
 }
-.menu_item:hover a::after
+.menu1_item:hover a::after
 {
 	width: 100%;
 }
-.menu_close_container
+.menu1_close_container
 {
 	position: absolute;
 	top: 94px;
@@ -678,7 +679,7 @@ section
 	-o-transform: rotate(45deg);
 	transform: rotate(45deg);
 }
-.menu_close
+.menu1_close
 {
 	top: 9px;
 	width: 21px;
@@ -690,7 +691,7 @@ section
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
-.menu_close::after
+.menu1_close::after
 {
 	display: block;
 	position: absolute;
@@ -706,17 +707,17 @@ section
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
-.menu_close_container:hover .menu_close,
-.menu_close_container:hover .menu_close::after
+.menu1_close_container:hover .menu1_close,
+.menu1_close_container:hover .menu1_close::after
 {
 	background: rgba(255,255,255,0.7);
 }
-.menu_search_form
+.menu1_search_form
 {
 	position: relative;
 	width: 300px;
 }
-.menu_search_input
+.menu1_search_input
 {
 	width: 100%;
 	height: 40px;
@@ -725,42 +726,42 @@ section
 	outline: none;
 	padding-left: 20px;
 }
-.menu_search_input::-webkit-input-placeholder
+.menu1_search_input::-webkit-input-placeholder
 {
 	font-size: 12px !important;
 	font-weight: 400 !important;
 	font-style: italic;
 	color: #ababab !important;
 }
-.menu_search_input:-moz-placeholder
+.menu1_search_input:-moz-placeholder
 {
 	font-size: 12px !important;
 	font-weight: 400 !important;
 	font-style: italic;
 	color: #ababab !important;
 }
-.menu_search_input::-moz-placeholder
+.menu1_search_input::-moz-placeholder
 {
 	font-size: 12px !important;
 	font-weight: 400 !important;
 	font-style: italic;
 	color: #ababab !important;
 } 
-.menu_search_input:-ms-input-placeholder
+.menu1_search_input:-ms-input-placeholder
 { 
 	font-size: 12px !important;
 	font-weight: 400 !important;
 	font-style: italic;
 	color: #ababab !important;
 }
-.menu_search_input::input-placeholder
+.menu1_search_input::input-placeholder
 {
 	font-size: 12px !important;
 	font-weight: 400 !important;
 	font-style: italic;
 	color: #ababab !important;
 }
-.menu_search_button
+.menu1_search_button
 {
 	position: absolute;
 	top: 0;
@@ -771,7 +772,7 @@ section
 	border: none;
 	outline: none;
 }
-.menu_social
+.menu1_social
 {
 	position: absolute;
 	left: 50%;
@@ -782,21 +783,21 @@ section
 	transform: translateX(-50%);
 	bottom: 15px;
 }
-.menu_social ul
+.menu1_social ul
 {
 	display: inline-block;
 	margin-left: 25px;
 	white-space: nowrap;
 }
-.menu_social ul li
+.menu1_social ul li
 {
 	display: inline-block;
 }
-.menu_social ul li:not(:last-child)
+.menu1_social ul li:not(:last-child)
 {
 	margin-right: 15px;
 }
-.menu_social ul li a i
+.menu1_social ul li a i
 {
 	color: rgba(255,255,255,0.7);
 	-webkit-transition: all 200ms ease;
@@ -806,32 +807,40 @@ section
 	transition: all 200ms ease;
 	padding: 5px;
 }
-.menu_social ul li a i:hover
+.menu1_social ul li a i:hover
 {
 	color: rgba(255,255,255,1);
 }
-
 /*********************************
-5. Home
+ Book an Appointment
+*********************************/
+.ml-auto, .mx-auto{
+	margin-top:20px;
+}
+#appointment{
+	margin-top:200px; 
+}
+/*********************************
+5. Home1
 *********************************/
 
-.home
+.home1
 {
 	width: 100%;
 	height: 382px;
 }
-.home_container
+.home1_container
 {
 	position: absolute;
 	bottom: 79px;
 	left: 0;
 	width: 100%;
 }
-.home_content
+.home1_content
 {
 
 }
-.home_title
+.home1_title
 {
 	display: inline-block;
 	height: 54px;

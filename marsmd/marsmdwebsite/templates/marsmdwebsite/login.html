@@ -14,19 +14,24 @@
 
     <!-- Icon -->
     <div class="fadeIn first">
-      <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+      <img src="{% static 'marsmdwebsite/images/user_icon.png' %}" id="icon" alt="User Icon" />
     </div>
 
     <!-- Login Form -->
-    <form method="post">
-      <input type="text" id="login" class="fadeIn second" name="email" placeholder="login">
-      <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
+    <form method="post" action="">
+      
+      {% csrf_token %}
+      {{ form.as_p }}
+      
+      <input type="text" id="login" class="fadeIn second" name="email" placeholder="username">
+      <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
       <input type="submit" class="fadeIn fourth" value="Log In">
     </form>
 
     <!-- Remind Passowrd -->
     <div id="formFooter">
-      <a class="underlineHover" href="#">Forgot Password?</a>
+      <a class="underlineHover" href="/forgot_password">Forgot Password?</a> <br><br>
+      <a class="underlineHover" href="/signup">Sign up!</a>
     </div>
 
   </div>
