@@ -1,0 +1,26 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="{% static 'marsmdwebsite/css/style.css' %}" type = "text/css"/>
+	<title>MARS-MD</title>
+</head>
+<body>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <h2 class="active"> Confirm Your Email </h2>
+    <!-- Login Form -->
+    <form method="post" action="">
+      
+      {% csrf_token %}
+      {{ form.as_p }}
+     
+      <input type="password" id="otp" class="fadeIn third" name="otp" placeholder="enter OTP">
+      <input type="submit" class="fadeIn fourth" value="Confirm">
+    </form>
+  </div>
+</div>
+</body>
+</html>

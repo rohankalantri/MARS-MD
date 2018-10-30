@@ -3,7 +3,12 @@ import MySQLdb
 from django import forms
 import datetime
 import json	
+from django.core.mail import BadHeaderError, send_mail, EmailMessage
+from django.http import HttpResponse, HttpResponseRedirect
+from random import randint
 
+
+signup_data = {}
 db = MySQLdb.connect(user='root', db='mars', passwd='Rohan333', host='localhost')
 cursor = db.cursor(MySQLdb.cursors.DictCursor)
 
@@ -32,15 +37,36 @@ def docSignUp(request):
 		address = request.POST.get("address", None)
 		working_hours = "9:00AM - 5:00PM"
 
-		# insert into doctor table
+		otp = str(randint(10000, 100000))
 
-		insert_doctor = cursor.execute("INSERT INTO doctor (doc_name, hospital, speciality, working_hours, email, phone, address, username) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s)", [name, hospital, speciality, working_hours, email, contact, address, username])
+		globals()['signup_data'] = {
+			"type" : "doctor",
+			"name" :  name,
+			"hospital" : hospital,
+			"speciality" : speciality,
+			"working_hours" : working_hours,
+			"address" : address,
+			"contact" : contact,
+			"email" : email,
+			"username" : username,
+			"password" : password,
+			"otp" : otp
+		}		
 
-		db.commit()
+		# send_mail(
+  #   		'Test Subject',
+  #   		'OTP is: 1234, please enter this to confirm your identity.',
+  #   		'kalantri0@gmail.com',
+  #   		['kalantri.rohan@example.com'],
+  #   		fail_silently=False,
+		# )
 
-		print(hospital)
-		print(speciality)
-		return redirect('/login')
+		message = "Thank you for registering on MARS-MD. Please verify your email address by entering the following One Time Password when requested. Your OTP is: " + otp
+
+		email = EmailMessage('MARS-MD Email Verification', message, to=[email])
+		email.send()
+
+		return redirect('/otp_confirmation')
 		
 
 
@@ -66,21 +92,77 @@ def signup(request):
 
 		print("\n\n\n\n\n")
 		
+		otp = str(randint(10000, 100000))
 
-		# insert into patient table
+		globals()['signup_data'] = {
+			"type" : "patient",
+			"name" :  name,
+			"age" : age,
+			"sex" : sex,
+			"contact" : contact,
+			"email" : email,
+			"username" : username,
+			"password" : password,
+			"otp" : otp
+		}		
 
-		
-		insert_into_login = cursor.execute("INSERT INTO login (username, password) VALUES (%s, %s)", [username, password])
-		db.commit()
-		insert_patient = cursor.execute("INSERT INTO patient (name, age, sex, phone, email, username) VALUES (%s, %s, %s, %s, %s, %s)", [name, age, sex, contact, email, username])
-		db.commit()
+		message = "Thank you for registering on MARS-MD. Please verify your email address by entering the following One Time Password when requested. Your OTP is: " + otp
 
-		print(sex)
-		print(age)
-		return redirect('/login')			
+		email = EmailMessage('MARS-MD Email Verification', message, to=[email])
+		email.send()
+
+		return redirect('/otp_confirmation')			
 
 
 	return render(request, 'marsmdwebsite/signup.html')
+
+
+
+def otp_confirmation(request):
+
+	cursor = db.cursor(MySQLdb.cursors.DictCursor)
+
+	print("\n\n\n\n\n")
+	
+	local_signup_data = globals()['signup_data']
+	
+	user_type = local_signup_data['type']
+	
+	print(local_signup_data)
+
+	if request.method == "POST":
+
+		otp = request.POST.get("otp", None)
+
+		if otp == local_signup_data['otp']:
+
+
+			if user_type == "patient":
+
+
+				insert_into_login = cursor.execute("INSERT INTO login (username, password) VALUES (%s, %s)", [local_signup_data['username'], local_signup_data['password']])
+				db.commit()
+				insert_patient = cursor.execute("INSERT INTO patient (name, age, sex, phone, email, username) VALUES (%s, %s, %s, %s, %s, %s)", [local_signup_data['name'], local_signup_data['age'], local_signup_data['sex'], local_signup_data['contact'], local_signup_data['email'], local_signup_data['username']])
+				db.commit()
+
+				return redirect('/login')
+				
+
+			elif user_type == "doctor":
+
+				# insert into login table
+				insert_into_login = cursor.execute("INSERT INTO login (username, password) VALUES (%s, %s)", [local_signup_data['username'], local_signup_data['password']])
+				db.commit()
+				
+				# insert into doctor table
+
+				insert_doctor = cursor.execute("INSERT INTO doctor (doc_name, hospital, speciality, working_hours, email, phone, address, username) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s)", [local_signup_data['name'], local_signup_data['hospital'], local_signup_data['speciality'], local_signup_data['working_hours'], local_signup_data['email'], local_signup_data['contact'], local_signup_data['address'], local_signup_data['username']])
+				db.commit()
+
+				return redirect('/login')
+
+
+	return render(request, 'marsmdwebsite/otp_confirmation.html')
 
 def login(request):
 	
